@@ -46,7 +46,8 @@ $currentFloor = 3;
 $requestedFloor = null;
 $calledFloors = [5, 1, 7];
 
-$nextFloor = getFloor($currentFloor, $requestedFloor, $calledFloors);
+$nextFloor = getFloor(0, null, [-3, 2]);
 $direction = getDirection($currentFloor, $requestedFloor, $calledFloors);
 
 echo "Next floor: $nextFloor, Direction: $direction\n";
+
