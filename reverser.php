@@ -8,7 +8,5 @@ function reverse(string $str): string
 function isPalindrome(string $str): bool
 {
     $revstr = strrev($str);
-    if ($str == $revstr) {
-        return TRUE;
-    }
+    return $str == $revstr;
 }
