@@ -1,6 +1,7 @@
 <?php
 
-function breakLines($string, $maxLength) {
+function breakLines($string, $maxLength): string
+{
     // Split the input string into lines
     $lines = explode("\n", $string);
 
