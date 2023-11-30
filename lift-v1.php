@@ -1,10 +1,10 @@
 <?php
 
-function getFloor($currentFloor, $requestedFloor, $calledFloors): string
+function getFloor($currentFloor, $requestedFloor, $calledFloors): int
 {
     // If there is a requested floor, go directly to that floor
     if ($requestedFloor !== null) {
-        return $requestedFloor;
+        return (int) $requestedFloor;
     }
 
     // If there are called floors, go to the nearest called floor
@@ -13,14 +13,15 @@ function getFloor($currentFloor, $requestedFloor, $calledFloors): string
             return abs($floor - $currentFloor);
         });
 
-        return $nearestFloor;
+        return (int) $nearestFloor;
     }
 
     // If there are no requested or called floors, stay on the current floor
-    return $currentFloor;
+    return (int) $currentFloor;
 }
 
-function getDirection($currentFloor, $requestedFloor, $calledFloors) {
+function getDirection($currentFloor, $requestedFloor, $calledFloors): int
+{
     if ($requestedFloor !== null) {
         // If there is a requested floor, determine the direction to reach it
         return ($requestedFloor > $currentFloor) ? 1 : (($requestedFloor < $currentFloor) ? -1 : 0);
