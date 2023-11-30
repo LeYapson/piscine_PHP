@@ -12,7 +12,7 @@ function lowerMe(string $str): string
 }
 function upperCaseFirst(string $str): string
 {
-    return ucfirst($str);
+    return ucwords($str);
 }
 function lowerCaseFirst(string $str): string
 {
