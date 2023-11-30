@@ -2,12 +2,12 @@
 
 function sayHello(): String
 {
-    echo "Hello";
+   return "Hello";
 }
 
 $name = "Abdelou";
 
 function sayHelloTo(string $name): String
 {
-    echo "Hello $name";
+   return "Hello $name";
 }
