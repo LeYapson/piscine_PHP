@@ -2,8 +2,6 @@
 
 $hour = date("H:i:s");
 
-print_r($hour);
-
 if ($hour >= 6 && $hour <= 12):
     echo "Hello ! Have a nice day :)";
     elseif ($hour >= 12 && $hour <= 18):
