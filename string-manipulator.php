@@ -1,7 +1,5 @@
 <?php
 
-$str ="mamaguevo et chimichangas";
-
 function capsMe(string $str): string
 {
     return strtoupper($str);
