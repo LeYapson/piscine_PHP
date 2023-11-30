@@ -14,7 +14,7 @@ function upperCaseFirst(string $str): string
 }
 function lowerCaseFirst(string $str): string
 {
-    return lcfirst(ucwords($string));
+    return lcfirst(ucwords($str));
 }
 function removeBlankSpace(string $str): string
 {
