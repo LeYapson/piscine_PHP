@@ -1,6 +1,7 @@
 <?php
 
-function breakLines($string, $maxLength) {
+function breakLines($string, $maxLength): string
+{
     // Explode the input string into an array of words
     $words = explode(' ', $string);
 
