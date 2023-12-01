@@ -21,6 +21,7 @@ function getFloor($currentFloor, $requestedFloor, $calledFloors): ?int
 }
 
 
+
 function getDirection($currentFloor, $requestedFloor, $calledFloors): int
 {
     if ($requestedFloor !== null) {
