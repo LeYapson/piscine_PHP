@@ -42,7 +42,7 @@ function getNearestNumberInArray($numbers, $reference) {
 function getDirection($currentFloor, $requestedFloor, $calledFloors): int
 {
     // return 0 if no movement is needed
-    if ($currentFloor === $requestedFloor || $currentFloor === getNearestNumberInArray($currentFloor, $calledFloors)) {
+    if ($currentFloor === $requestedFloor) {
         return 0;
     }
 
