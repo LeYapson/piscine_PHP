@@ -1,9 +1,9 @@
 <?php
 
-function getFloor($currentFloor, $requestedFloor, $calledFloors): int
+function getFloor($currentFloor, $requestedFloor, $calledFloors): ?int
 {
     // If there is a requested floor, go directly to that floor
-    if ($requestedFloor != null) {
+    if ($requestedFloor !== null) {
         return (int) $requestedFloor;
     }
 
