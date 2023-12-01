@@ -47,13 +47,15 @@ function getDirection($currentFloor, $requestedFloor, $calledFloors): int
     }
 
     // handle the case when there are no called floors
-    $nearestFloor = getNearestNumberInArray($currentFloor, $calledFloors);
-    if ($nearestFloor === null) {
+    if (empty($calledFloors)) {
         return 0;
     }
 
+    // find the nearest floor among the called floors
+    $nearestFloor = getNearestNumberInArray($currentFloor, $calledFloors);
+
     // return 1 if the elevator needs to go up
-    elseif ($currentFloor < $requestedFloor || $currentFloor < $nearestFloor) {
+    if ($currentFloor < $requestedFloor || $currentFloor < $nearestFloor) {
         return 1;
     }
     // return -1 if the elevator needs to go down
@@ -61,6 +63,7 @@ function getDirection($currentFloor, $requestedFloor, $calledFloors): int
         return -1;
     }
 }
+
 
 
 // Example usage:
