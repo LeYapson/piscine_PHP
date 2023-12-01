@@ -1,73 +1,65 @@
 <?php
 
-function getFloor(int $currentFloor, ?int $requestedFloor, array $calledFloors): ?int
+function getFloor($currentFloor, $requestedFloor, $calledFloors): ?int
 {
-    // If a floor is requested, go to that floor
+    // If there is a requested floor, go directly to that floor
     if ($requestedFloor !== null) {
-        return $requestedFloor;
+        return (int) $requestedFloor;
+    }
+    // print to terminal
+
+    // If there are called floors, go to the nearest called floor
+    if (!empty($calledFloors)) {
+        $nearestFloor = getNearestNumberInArray($currentFloor, $calledFloors);
+
+        return (int) $nearestFloor;
     }
 
-    // If no floor is requested, check for called floors
-    if (empty($calledFloors)) {
-        return null;
-    }
-
-    // Find the nearest called floor above the current floor
-    $nearestFloorAbove = null;
-
-    foreach ($calledFloors as $floor) {
-        if ($floor > $currentFloor && ($nearestFloorAbove === null || abs($floor - $currentFloor) < abs($nearestFloorAbove - $currentFloor))) {
-            $nearestFloorAbove = $floor;
-        }
-    }
-
-    // Find the nearest called floor below the current floor
-    $nearestFloorBelow = null;
-
-    foreach ($calledFloors as $floor) {
-        if ($floor < $currentFloor && ($nearestFloorBelow === null || abs($floor - $currentFloor) < abs($nearestFloorBelow - $currentFloor))) {
-            $nearestFloorBelow = $floor;
-        }
-    }
-
-    // If there is a called floor closer than the requested floor, go to that floor
-    if ($nearestFloorAbove !== null && abs($nearestFloorAbove - $currentFloor) < abs($requestedFloor - $currentFloor)) {
-        return $nearestFloorAbove;
-    } elseif ($nearestFloorBelow !== null && abs($nearestFloorBelow - $currentFloor) < abs($requestedFloor - $currentFloor)) {
-        return $nearestFloorBelow;
-    }
-
-    // Otherwise, there are no called floors closer than the requested floor, so go to the requested floor
-    return $requestedFloor;
+    // If there are no requested or called floors, stay on the current floor
+    return (int) $currentFloor;
 }
 
-function getDirection(int $currentFloor, ?int $requestedFloor, array $calledFloors): int
+function getDirection($currentFloor, $requestedFloor, $calledFloors): int
 {
-    // If no movement is needed
-    if ($requestedFloor === null && empty($calledFloors)) {
+    //return 0 if no mvmt is needed
+    if ($currentFloor === $requestedFloor) {
         return 0;
-    }
-
-    // If a floor is requested
-    if ($requestedFloor !== null) {
-        if ($requestedFloor > $currentFloor) {
-            return 1;
-        } elseif ($requestedFloor < $currentFloor) {
-            return -1;
-        } else {
-            return 0;
-        }
-    }
-
-    // If there are called floors, go to the nearest one
-    $nearestFloor = getFloor($currentFloor, null, $calledFloors);
-
-    if ($nearestFloor === null) {
-        return 0;
-    } elseif ($nearestFloor > $currentFloor) {
+        //return 1 if the elevator go up
+    }elseif ($currentFloor < $requestedFloor || $currentFloor < $calledFloors) {
         return 1;
-    } else {
+        //return -1 if the elevator go down
+    }else {
         return -1;
     }
+    
+    
 }
 
+// return an integer
+// take as input an integer and an array of integers
+// return the integer in the array that is closest to the input integer
+function getNearestNumberInArray($numbers, $reference) {
+    $nearest = null;
+    $nearestDistance = null;
+
+    foreach ($reference as $number) {
+        $distance = abs($number - $numbers);
+
+        if ($nearestDistance === null || $distance < $nearestDistance) {
+            $nearest = $number;
+            $nearestDistance = $distance;
+        }
+    }
+
+    return $nearest;
+}
+
+// Example usage:
+$currentFloor = 9;
+$requestedFloor = 5;
+$calledFloors = [-2, 6];
+
+$nextFloor = getFloor($currentFloor, $requestedFloor, $calledFloors);
+$direction = getDirection($currentFloor, $requestedFloor, $calledFloors);
+
+echo "Next floor: $nextFloor, Direction: $direction\n";
