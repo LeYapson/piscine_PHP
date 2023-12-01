@@ -22,7 +22,7 @@ function getFloor($currentFloor, $requestedFloor, $calledFloors): ?int
 function getDirection($currentFloor, $requestedFloor, $calledFloors): int
 {
     //return 0 if no mvmt is needed
-    if ($currentFloor === $requestedFloor) {
+    if ($currentFloor === $requestedFloor || $currentFloor === $calledFloors) {
         return 0;
         //return 1 if the elevator go up
     }elseif ($currentFloor < $requestedFloor || $currentFloor < $calledFloors) {
