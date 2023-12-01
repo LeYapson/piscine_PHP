@@ -16,7 +16,7 @@ function getFloor($currentFloor, $requestedFloor, $calledFloors): ?int
     }
 
     // If there are no requested or called floors, stay on the current floor
-    return (int) $currentFloor;
+    return null;
 }
 
 function getNearestNumberInArray($numbers, $reference) {
