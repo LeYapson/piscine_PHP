@@ -19,27 +19,11 @@ function getFloor($currentFloor, $requestedFloor, $calledFloors): ?int
     return (int) $currentFloor;
 }
 
-function getDirection($currentFloor, $requestedFloor, $calledFloors): int
-{
-    // return 0 if no movement is needed
-    if ($currentFloor === $requestedFloor || $currentFloor === getNearestNumberInArray($currentFloor, $calledFloors)) {
-        return 0;
-    }
-    // return 1 if the elevator needs to go up
-    elseif ($currentFloor < $requestedFloor || $currentFloor < getNearestNumberInArray($currentFloor, $calledFloors)) {
-        return 1;
-    }
-    // return -1 if the elevator needs to go down
-    else {
-        return -1;
-    }
-}
-
-
-// return an integer
-// take as input an integer and an array of integers
-// return the integer in the array that is closest to the input integer
 function getNearestNumberInArray($numbers, $reference) {
+    if (empty($reference)) {
+        return null;
+    }
+
     $nearest = null;
     $nearestDistance = null;
 
@@ -55,10 +39,34 @@ function getNearestNumberInArray($numbers, $reference) {
     return $nearest;
 }
 
+function getDirection($currentFloor, $requestedFloor, $calledFloors): int
+{
+    // return 0 if no movement is needed
+    if ($currentFloor === $requestedFloor || $currentFloor === getNearestNumberInArray($currentFloor, $calledFloors)) {
+        return 0;
+    }
+
+    // handle the case when there are no called floors
+    $nearestFloor = getNearestNumberInArray($currentFloor, $calledFloors);
+    if ($nearestFloor === null) {
+        return 0;
+    }
+
+    // return 1 if the elevator needs to go up
+    elseif ($currentFloor < $requestedFloor || $currentFloor < $nearestFloor) {
+        return 1;
+    }
+    // return -1 if the elevator needs to go down
+    else {
+        return -1;
+    }
+}
+
+
 // Example usage:
-$currentFloor = 9;
-$requestedFloor = 5;
-$calledFloors = [-2, 6];
+$currentFloor = 1;
+$requestedFloor = null;
+$calledFloors = [];
 
 $nextFloor = getFloor($currentFloor, $requestedFloor, $calledFloors);
 $direction = getDirection($currentFloor, $requestedFloor, $calledFloors);
