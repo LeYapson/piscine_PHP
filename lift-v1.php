@@ -21,19 +21,20 @@ function getFloor($currentFloor, $requestedFloor, $calledFloors): ?int
 
 function getDirection($currentFloor, $requestedFloor, $calledFloors): int
 {
-    //return 0 if no mvmt is needed
-    if ($currentFloor === $requestedFloor || $currentFloor === $calledFloors) {
+    // return 0 if no movement is needed
+    if ($currentFloor === $requestedFloor || $currentFloor === getNearestNumberInArray($currentFloor, $calledFloors)) {
         return 0;
-        //return 1 if the elevator go up
-    }elseif ($currentFloor < $requestedFloor || $currentFloor < $calledFloors) {
+    }
+    // return 1 if the elevator needs to go up
+    elseif ($currentFloor < $requestedFloor || $currentFloor < getNearestNumberInArray($currentFloor, $calledFloors)) {
         return 1;
-        //return -1 if the elevator go down
-    }else {
+    }
+    // return -1 if the elevator needs to go down
+    else {
         return -1;
     }
-    
-    
 }
+
 
 // return an integer
 // take as input an integer and an array of integers
