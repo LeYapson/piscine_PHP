@@ -1,12 +1,11 @@
 <?php
 
-function factorial(float $n): int|float
-{
-    if ($n === 0 || $n === 1) {
+function factorial($number): int |float {
+
+    if ($number < 2) {
         return 1;
     } else {
-        return $n * factorial($n - 1);
+        return ($number * factorial($number-1));
     }
 }
-
 echo factorial(45);
