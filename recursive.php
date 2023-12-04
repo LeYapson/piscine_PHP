@@ -1,6 +1,6 @@
 <?php
 
-function factorial($n): float {
+function factorial(float $n): float {
     // Base case: factorial of 0 or 1 is 1
     if ($n == 0 || $n == 1) {
         return 1;
@@ -9,8 +9,3 @@ function factorial($n): float {
         return $n * factorial($n - 1);
     }
 }
-
-// Example usage:
-$number = 5;
-$result = factorial($number);
-echo "The factorial of $number is: $result";
