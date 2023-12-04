@@ -14,7 +14,7 @@ Trick : A function can return another function. Using anonymous functions, you'l
 Trick 2 (because we're cool): Here are 2 ways to declare an anonymous function
 */
 
-$f = function () {
+function f() {
     return [
         '+' => function ($a, $b) {
             return $a + $b;
