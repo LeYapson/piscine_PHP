@@ -6,7 +6,7 @@
 //The value key to find : string
 //The array : array
 
-function findIn($value, $array)
+function findIn($value, $array): array|bool
 {
     if (array_key_exists($value, $array)) {
         return $array[$value];
