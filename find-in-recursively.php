@@ -6,11 +6,19 @@
 //The value key to find : string
 //The array : array
 
-function findIn($value, $array): array|bool
-{
-    if (array_key_exists($value, $array)) {
-        return $array[$value];
-    } else {
-        return false;
+function findIn($key, $array):string | bool {
+    if (array_key_exists($key, $array)) {
+        return $array[$key];
     }
+    
+    foreach ($array as $value) {
+        if (is_array($value)) {
+            $result = findIn($key, $value);
+            if ($result !== false) {
+                return $result;
+            }
+        }
+    }
+    
+    return false;
 }
