@@ -8,7 +8,7 @@ Example : It is July 29, 2021
 Create a $isLeapYear closure which will check if the year passed as a parameter is leap.
 */
 $today = function () {
-    $date = date('F j, Y');
+    $date = date('F 0j, Y');
     return "It is $date";
 };
 
