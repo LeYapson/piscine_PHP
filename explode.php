@@ -30,20 +30,29 @@ function explodeWords($string, $separator = " ", $limit = PHP_INT_MAX): array {
     $result = [];
     $word = "";
     $count = 0;
+    $isInsideWord = false;
+
     for ($i = 0; $i < strlen($string); $i++) {
-        if ($string[$i] === $separator) {
+        if ($string[$i] === $separator && !$isInsideWord) {
             $result[] = $word;
             $word = "";
             $count++;
-            if ($count === $limit) {
+            if ($count === $limit - 1) {
                 break;
             }
         } else {
             $word .= $string[$i];
+            if ($string[$i] === $separator) {
+                $isInsideWord = true;
+            } else {
+                $isInsideWord = false;
+            }
         }
     }
+
     if ($word !== "") {
         $result[] = $word;
     }
+
     return $result;
 }
