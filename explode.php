@@ -28,31 +28,22 @@ You are not allowed to use explode, make your own. */
 
 function explodeWords($string, $separator = " ", $limit = PHP_INT_MAX): array {
     $result = [];
-    $word = "";
     $count = 0;
-    $isInsideWord = false;
 
-    for ($i = 0; $i < strlen($string); $i++) {
-        if ($string[$i] === $separator && !$isInsideWord) {
-            $result[] = $word;
-            $word = "";
-            $count++;
-            if ($count === $limit - 1) {
-                break;
-            }
-        } else {
-            $word .= $string[$i];
-            if ($string[$i] === $separator) {
-                $isInsideWord = true;
-            } else {
-                $isInsideWord = false;
-            }
+    while (($pos = strpos($string, $separator)) !== false) {
+        $result[] = substr($string, 0, $pos);
+        $string = substr($string, $pos + strlen($separator));
+        $count++;
+
+        if ($count === $limit - 1) {
+            break;
         }
     }
 
-    if ($word !== "") {
-        $result[] = $word;
+    if ($string !== "") {
+        $result[] = $string;
     }
 
     return $result;
 }
+
