@@ -26,46 +26,24 @@ explodeWords('My-name/is-John/and-i-love-apple', '/', -1); // ['My-name', 'is-Jo
 
 You are not allowed to use explode, make your own. */
 
-function explodeWords($string, $separator = ' ', $limit = PHP_INT_MAX): array {
+function explodeWords($string, $separator = " ", $limit = PHP_INT_MAX): array {
     $result = [];
-    $current = '';
     $count = 0;
 
-    for ($i = 0; $i < strlen($string); $i++) {
-        $char = $string[$i];
+    while (($pos = strpos($string, $separator)) !== false) {
+        $result[] = substr($string, 0, $pos);
+        $string = substr($string, $pos + strlen($separator));
+        $count++;
 
-        if ($char === $separator) {
-            $result[] = $current;
-            $current = '';
-            $count++;
-
-            if ($count === abs($limit)) {
-                break;
-            }
-        } else {
-            $current .= $char;
+        if ($count === $limit - 1) {
+            break;
         }
     }
 
-    if ($current !== '') {
-        $result[] = $current;
+    if ($string !== "") {
+        $result[] = $string;
     }
 
-    if ($limit === 0) {
-        return array_slice($result, 0, 1);
-    }
-
-    if ($limit > 0) {
-        $lastIndex = count($result) - 1;
-        $result[$lastIndex] .= substr($string, $i);
-    }
-
-    return ($limit < 0) ? array_slice($result, 0, $limit) : $result;
+    return $result;
 }
-
-// Examples
-print_r(explodeWords('My name is John')); // ['My', 'name', 'is', 'John']
-print_r(explodeWords('My-name/is-John', '/')); // ['My-name', 'is-John']
-print_r(explodeWords('My-name/is-John/and-i-love-apple', '/', 2)); // ['My-name', 'is-John/and-i-love-apple']
-print_r(explodeWords('My-name/is-John/and-i-love-apple', '/', -1)); // ['My-name', 'is-John']
 
