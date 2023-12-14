@@ -19,7 +19,7 @@ function dnaDiff(string $str1, string $str2) : int
     $count = 0;
     if (sizeof($arr1) != sizeof($arr2))
     {
-        return false;
+        return 0;
     }
     else 
     {
