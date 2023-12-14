@@ -28,8 +28,6 @@ function dnaDiff(string $str1, string $str2) : int
             if ($arr1[$i] != $arr2[$i])
             {
                 $count++;
-            } else {
-                return 0;
             }
         }
     }
