@@ -26,7 +26,7 @@ explodeWords('My-name/is-John/and-i-love-apple', '/', -1); // ['My-name', 'is-Jo
 
 You are not allowed to use explode, make your own. */
 
-function explodeWords($string, $separator = " ", $limit = PHP_INT_MAX): array {
+function explodeWords($string, $separator = " ,-", $limit = PHP_INT_MAX): array {
     $result = [];
     $count = 0;
 
