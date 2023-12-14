@@ -1,49 +1,49 @@
 <?php
-
-/*Create an explodeWords function that takes a string as the first argument, a separator as the second argument, and a limit as the third argument.
-
-This function will be able to return an array of strings, each of which is a substring of a string formed by dividing it on boundaries formed by the string separator.
-
-The second parameter will by default be equal to a space if it is not filled in.
-
-The third parameter will by default be equal to PHP_INT_MAX if it is not specified.
-
-/!\ Pay attention to the limit parameter /!\
-
-    If limit is set and positive, the returned array will contain a maximum of limit elements with the last element containing the rest of the string.
-    If the limit parameter is negative, all components except the last -limit are returned.
-    If the limit parameter is equal to zero, then this is treated as 1.
-
-Example :
-
-explodeWords('My name is John'); // ['My', 'name', 'is', 'John']
-
-explodeWords('My-name/is-John', '/'); // ['My-name', 'is-John']
-
-explodeWords('My-name/is-John/and-i-love-apple', '/', 2); // ['My-name', 'is-John/and-i-love-apple']
-
-explodeWords('My-name/is-John/and-i-love-apple', '/', -1); // ['My-name', 'is-John']
-
-You are not allowed to use explode, make your own. */
-
-function explodeWords($string, $separator = " ", $limit = PHP_INT_MAX): array {
-    $result = [];
+function explodeWords(string $sentence, string $separator = " ", int $limit = PHP_INT_MAX) : array
+{
+    $arr = str_split($sentence);
     $count = 0;
-
-    while (($pos = strpos($string, $separator)) !== false) {
-        $result[] = substr($string, 0, $pos);
-        $string = substr($string, $pos + strlen($separator));
-        $count++;
-
-        if ($count === $limit - 1) {
-            break;
+    $new_limit = 0;
+    $finalArr = [];
+    for ($i = 0; $i < sizeof($arr); $i++)
+    {
+        if ($limit >= 0)
+        {
+            if ($arr[$i] != $separator && $count < $limit - 1)
+            {
+                $finalArr[$count] .= $arr[$i];
+            }
+            elseif ($arr[$i] == $separator && $count < $limit - 1) 
+            {
+                $count++;
+            }
+            else 
+            {
+                $finalArr[$count] .= $arr[$i];
+            }
+        }
+        else 
+        {
+            if ($arr[$i] == $separator)
+            {
+                $new_limit++;
+            }
         }
     }
-
-    if ($string !== "") {
-        $result[] = $string;
+    for ($i = 0; $i < sizeof($arr); $i++)
+    {
+        if ($limit < 0)
+        {
+            if ($arr[$i] != $separator && $count < ($new_limit + $limit + 1))
+            {
+                $finalArr[$count] .= $arr[$i];
+            }
+            elseif ($arr[$i] == $separator && $count < ($new_limit + $limit + 1)) 
+            {
+                $count++;
+            }
+        }
     }
-
-    return $result;
+    return $finalArr;
 }
-
+print_r(explodeWords('My-name/is-John', '/'));
